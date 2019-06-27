@@ -1,3 +1,14 @@
+---
+{
+  "updatedAt": "2018-07-19",
+  "subtitle": "Injetando providers opcionais de forma inteligente!",
+  "cover": "deps-opcionais-em-angular-cover.jpeg",
+  "tags": [
+    "angular"
+  ]
+}
+---
+
 # Deps opcionais em Angular
 
 Geralmente quando crio componentes em Angular, é preciso fornecer uma maneira de customizar como a lógica do mesmo vai funcionar. Uma boa maneira para fazer isso, é criar uma classe de configuração com algumas propriedades que vão ditar como a lógica funcionará. Assim, poderíamos usar essa classe de configuração da seguinte forma em um componente:
