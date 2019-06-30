@@ -2,13 +2,13 @@
   <div>
     <nav class="header navbar navbar-dark bg-dark">
       <div class="d-flex flex-column flex-sm-row align-items-center container">
-        <a class="text-white" href="/">
+        <router-link class="text-white" to="/">
           <h3>Henrique Custódia</h3>
-        </a>
+        </router-link>
 
         <div class="ml-sm-auto">
-          <a class="text-white btn btn-outline-secondary" href="/">Blog</a>
-          <a class="text-white btn btn-outline-secondary" href="/sobre-mim">Sobre mim</a>
+          <router-link class="text-white btn btn-outline-secondary" to="/">Blog</router-link>
+          <router-link class="text-white btn btn-outline-secondary" to="/sobre-mim">Sobre mim</router-link>
         </div>
       </div>
     </nav>
@@ -16,7 +16,7 @@
     <div class="container py-3">
       <template v-if="!showContent">
         <template v-if="lastPost">
-          <a class="text-dark" :href="lastPost.path">
+          <router-link class="text-dark" :to="lastPost.path">
             <div class="card m-2">
               <div class="row no-gutters">
                 <div class="col-md-4">
@@ -40,12 +40,12 @@
                 </div>
               </div>
             </div>
-          </a>
+          </router-link>
         </template>
 
         <div class="d-flex flex-wrap mt-3">
           <template v-for="(item, index) in pastPosts">
-            <a class="text-dark" :href="item.path">
+            <router-link class="text-dark" :to="item.path">
               <div class="card card-width mt-3 m-sm-2">
                 <img :src="item.frontmatter.cover" class="card-img-top">
                 <div class="card-body">
@@ -62,7 +62,7 @@
                   </div>
                 </div>
               </div>
-            </a>
+            </router-link>
           </template>
         </div>
       </template>
@@ -277,7 +277,7 @@ export default {
 
     posts() {
       return this.$site.pages
-        .filter(item => item.path.startsWith("/blog"))
+        .filter(item => item.path.startsWith("/posts"))
         .sort((a, b) => {
           const da = new Date(a.frontmatter.updatedAt);
           const db = new Date(b.frontmatter.updatedAt);
