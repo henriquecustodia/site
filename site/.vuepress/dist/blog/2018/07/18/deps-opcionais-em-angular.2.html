@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Deps opcionais em Angular</title>
+    <meta name="description" content="">
+    
+    
+    <link rel="preload" href="/assets/css/0.styles.0131caf7.css" as="style"><link rel="preload" href="/assets/js/app.6b27c886.js" as="script"><link rel="preload" href="/assets/js/3.f76f41c0.js" as="script"><link rel="preload" href="/assets/js/6.03bf54f1.js" as="script"><link rel="preload" href="/assets/js/2.bab84f14.js" as="script"><link rel="prefetch" href="/assets/js/10.e4d43c67.js"><link rel="prefetch" href="/assets/js/4.e8f9f5a5.js"><link rel="prefetch" href="/assets/js/5.bac0c13f.js"><link rel="prefetch" href="/assets/js/7.e3ca492c.js"><link rel="prefetch" href="/assets/js/8.8fa089a6.js"><link rel="prefetch" href="/assets/js/9.a759e23c.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.0131caf7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div data-v-eefae7f6><nav class="header navbar navbar-dark bg-dark" data-v-eefae7f6><div class="d-flex flex-column flex-sm-row align-items-center container" data-v-eefae7f6><a href="/" class="text-white" data-v-eefae7f6><h3 data-v-eefae7f6>Henrique Custódia</h3></a> <div class="ml-sm-auto" data-v-eefae7f6><a href="/" class="text-white btn btn-outline-secondary" data-v-eefae7f6>Blog</a> <a href="/sobre-mim" class="text-white btn btn-outline-secondary" data-v-eefae7f6>Sobre mim</a></div></div></nav> <div class="container py-3" data-v-eefae7f6><div class="content__default" data-v-eefae7f6><h1 id="deps-opcionais-em-angular"><a href="#deps-opcionais-em-angular" aria-hidden="true" class="header-anchor">#</a> Deps opcionais em Angular</h1> <p>Geralmente quando crio componentes em Angular, é preciso fornecer uma maneira de customizar como a lógica do mesmo vai funcionar. Uma boa maneira para fazer isso, é criar uma classe de configuração com algumas propriedades que vão ditar como a lógica funcionará. Assim, poderíamos usar essa classe de configuração da seguinte forma em um componente:</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">// Classe de configuração</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Config</span> <span class="token punctuation">{</span>
+  show<span class="token punctuation">:</span> <span class="token builtin">boolean</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Componente que receberá a classe</span>
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span> 
+  selector<span class="token punctuation">:</span> <span class="token string">'component'</span><span class="token punctuation">,</span>
+  template<span class="token punctuation">:</span> <span class="token string">'&lt;div *ngIf=&quot;show&quot;&gt;Can you see me?&lt;/div&gt;'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>  
+  @<span class="token function">Input</span><span class="token punctuation">(</span><span class="token punctuation">)</span> config<span class="token punctuation">:</span> Config <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// instancia a classe para evitar erros</span>
+  
+  show<span class="token punctuation">:</span> <span class="token builtin">boolean</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>config<span class="token punctuation">.</span>show<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// usando ambos</span>
+<span class="token operator">&lt;</span>component <span class="token punctuation">[</span>config<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;config&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>component<span class="token operator">&gt;</span>
+</code></pre></div><p>Passando a configuração via Input é uma maneira muito boa de customizar o comportamento de um componente. Porém, há casos em que precisamos usar determinado componente várias vezes pela aplicação e replicar a mesma configuração para todos os lugares que o componente está sendo usado será ruim para a manutenção da aplicação. Uma boa solução para isso é registrar a classe de configuração como um Provider:</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">// Classe de configuração e token de injeção</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">CONFIG</span><span class="token punctuation">:</span> InjectionToken<span class="token operator">&lt;</span>Config<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">InjectionToken</span><span class="token punctuation">(</span><span class="token string">'Config'</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Config</span> <span class="token punctuation">{</span>
+  show<span class="token punctuation">:</span> <span class="token builtin">boolean</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Componente que consumirá a configuração  </span>
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span> 
+  selector<span class="token punctuation">:</span> <span class="token string">'component'</span><span class="token punctuation">,</span>
+  template<span class="token punctuation">:</span> <span class="token string">'&lt;div *ngIf=&quot;show&quot;&gt;Can you see me?&lt;/div&gt;'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>  
+  @<span class="token function">Input</span><span class="token punctuation">(</span><span class="token punctuation">)</span> config<span class="token punctuation">:</span> Config<span class="token punctuation">;</span>
+  
+  show<span class="token punctuation">:</span> <span class="token builtin">boolean</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>config<span class="token punctuation">.</span>show<span class="token punctuation">;</span>
+  
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token parameter">@<span class="token function">Optional</span><span class="token punctuation">(</span><span class="token punctuation">)</span> @<span class="token function">Inject</span><span class="token punctuation">(</span><span class="token constant">CONFIG</span><span class="token punctuation">)</span> <span class="token keyword">private</span> config<span class="token punctuation">:</span> Config</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token keyword">this</span><span class="token punctuation">.</span>config <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>config <span class="token operator">||</span> <span class="token keyword">new</span> <span class="token class-name">Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><blockquote><p>Note que usamos o decorator Optional para evitar que o Angular não dispare um erro de injeção, caso o Provider da CONFIG não exista.</p></blockquote> <p>Seguindo o exemplo acima, poderíamos registrar a configuração customizada como um Provider para toda a aplicação poder consumir, sem precisar replicar a mesma.</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">// Customiza a configuração padrão</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyCustomConfig</span> <span class="token keyword">extends</span> <span class="token class-name">Config</span> <span class="token punctuation">{</span>
+  show<span class="token punctuation">:</span> <span class="token builtin">boolean</span> <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+@<span class="token function">NgModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// Registra a configuração customizada   </span>
+  providers<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> provider<span class="token punctuation">:</span> <span class="token constant">CONFIG</span><span class="token punctuation">,</span> useClass<span class="token punctuation">:</span> MyCustomConfig <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppModule</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre></div><p>Agora que foi registrado o Provider da CONFIG no módulo root da aplicação, a configuração customizada existirá para todos os lugares em que o componente for usado, assim não há necessidade de replicar a mesma configuração! Simples não?!</p> <h2 id="eis-o-problema"><a href="#eis-o-problema" aria-hidden="true" class="header-anchor">#</a> Eis o problema</h2> <p>Apesar da solução a cima ser muito boa em relação ao reuso, caso o Provider da CONFIG precise ser usado em outro componente, service ou diretiva, teríamos que replicar o tratamento para quando o Provider da Config não existir:</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token parameter">@<span class="token function">Optional</span><span class="token punctuation">(</span><span class="token punctuation">)</span> @<span class="token function">Inject</span><span class="token punctuation">(</span><span class="token constant">CONFIG</span><span class="token punctuation">)</span> <span class="token keyword">private</span> config<span class="token punctuation">:</span> Config</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+ <span class="token keyword">this</span><span class="token punctuation">.</span>config <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>config <span class="token operator">||</span> <span class="token keyword">new</span> <span class="token class-name">Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="eis-a-solucao"><a href="#eis-a-solucao" aria-hidden="true" class="header-anchor">#</a> Eis a solução</h2> <p>A solução para melhorar ainda mais o reuso e evitar problemas com manutenção desse código, é criar um Factory Provider para quando o Provider da CONFIG não existir, a factory retornará uma instância padrão da configuração. Dito isso, vamos ver como fica a implementação:</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">// Classe de configuração e token de injeção</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> <span class="token constant">CONFIG</span><span class="token punctuation">:</span> InjectionToken<span class="token operator">&lt;</span>Config<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">InjectionToken</span><span class="token punctuation">(</span><span class="token string">'Config'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Config</span> <span class="token punctuation">{</span>
+  show<span class="token punctuation">:</span> <span class="token builtin">boolean</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token comment">// Função factory que verificará se existe um provider </span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">configFactory</span><span class="token punctuation">(</span><span class="token parameter">parent<span class="token punctuation">:</span> Config</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Config <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> parent <span class="token operator">||</span> <span class="token keyword">new</span> <span class="token class-name">Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Componente que consumirá a configuração  </span>
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span> 
+  selector<span class="token punctuation">:</span> <span class="token string">'component'</span><span class="token punctuation">,</span>
+  template<span class="token punctuation">:</span> <span class="token string">'&lt;div *ngIf=&quot;show&quot;&gt;Can you see me?&lt;/div&gt;'</span><span class="token punctuation">,</span>
+  providers<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      provide<span class="token punctuation">:</span> <span class="token constant">CONFIG</span><span class="token punctuation">,</span>
+      useFactory<span class="token punctuation">:</span> configFactory<span class="token punctuation">,</span>
+      deps<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">[</span><span class="token keyword">new</span> <span class="token class-name">Optional</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">SkipSelf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Inject</span><span class="token punctuation">(</span>Config<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>  
+  @<span class="token function">Input</span><span class="token punctuation">(</span><span class="token punctuation">)</span> config<span class="token punctuation">:</span> Config<span class="token punctuation">;</span>
+  
+  show<span class="token punctuation">:</span> <span class="token builtin">boolean</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>config<span class="token punctuation">.</span>showSomething<span class="token punctuation">;</span>
+  
+  <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token parameter">@<span class="token function">Inject</span><span class="token punctuation">(</span><span class="token constant">CONFIG</span><span class="token punctuation">)</span> <span class="token keyword">private</span> config<span class="token punctuation">:</span> Config</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Note que a propriedade deps recebe um array com as instâncias dos decorators Optional, SkipSelf e Inject. Basicamente estamos dizendo ao Injector do Angular:</p> <ul><li>Optional: o Provider da CONFIG pode não existir, então não dispare erros.</li> <li>SkipSelf: o Injector deve procurar Provider da CONFIG apenas nos injectors parents e não no mesmo Injector do componente.</li> <li>Inject: o Injector deve injetar o Provider da CONFIG.</li></ul> <h2 id="agora-ficou-bom"><a href="#agora-ficou-bom" aria-hidden="true" class="header-anchor">#</a> Agora ficou bom!</h2> <p>Após todas essas alterações, agora podemos injetar o Provider da Config sem precisar fazer qualquer tratamento, pois a config factory estará cuidando disso para nós!</p> <p>Se esse artigo ajudou você de alguma forma não deixe de compartilhar e recomendar, garanto que existem muitas pessoas com as mesmas necessidades!</p> <p>Obrigado por ler e até a próxima! 😃</p></div> <div id="disqus_thread" data-v-eefae7f6></div></div></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.6b27c886.js" defer></script><script src="/assets/js/3.f76f41c0.js" defer></script><script src="/assets/js/6.03bf54f1.js" defer></script><script src="/assets/js/2.bab84f14.js" defer></script>
+  </body>
+</html>

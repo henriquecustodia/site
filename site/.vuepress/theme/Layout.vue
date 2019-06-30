@@ -1,12 +1,12 @@
 <template>
   <div>
     <nav class="header navbar navbar-dark bg-dark">
-      <div class="content container">
+      <div class="d-flex flex-column flex-sm-row align-items-center container">
         <a class="text-white" href="/">
           <h3>Henrique Custódia</h3>
         </a>
 
-        <div class="ml-auto">
+        <div class="ml-sm-auto">
           <a class="text-white btn btn-outline-secondary" href="/">Blog</a>
           <a class="text-white btn btn-outline-secondary" href="/sobre-mim">Sobre mim</a>
         </div>
@@ -46,7 +46,7 @@
         <div class="d-flex flex-wrap mt-3">
           <template v-for="(item, index) in pastPosts">
             <a class="text-dark" :href="item.path">
-              <div class="card w-350 m-2">
+              <div class="card card-width mt-3 m-sm-2">
                 <img :src="item.frontmatter.cover" class="card-img-top">
                 <div class="card-body">
                   <h5 class="card-title">{{ item.title }}</h5>
@@ -69,6 +69,7 @@
 
       <template v-else>
         <Content/>
+        <VueDisqus shortname="henriquecustdia"/>
       </template>
     </div>
   </div>
@@ -77,8 +78,13 @@
 <style lang="scss">
 @import "bootstrap/scss/bootstrap.scss";
 
-body {
+html,
+body,
+#app {
   margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* PrismJS 1.16.0
@@ -217,32 +223,41 @@ a {
   display: flex;
   justify-content: center;
   padding: 0 25px;
-
-  .content {
-    display: flex;
-    align-items: center;
-  }
 }
 
-.w-350 {
-  width: 350px;
+.card-width {
+  max-width: 350px;
+  width: 100%;
 }
 
 a:hover {
   text-decoration: none;
 }
 
+@media screen and (max-width: 1024px) {
+  .card-width {
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card-width {
+    max-width: none;
+  }
+}
 </style>
 
 <script>
 import format from "date-fns/format";
 import pt from "date-fns/locale/pt";
+import VueDisqus from "vue-disqus/dist/vue-disqus.vue";
 
 function formatDate(value) {
   return format(new Date(value), "DD [de] MMMM [de] YYYY", { locale: pt });
 }
 
 export default {
+  components: { VueDisqus },
   filters: {
     formatDate
   },
