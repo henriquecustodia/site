@@ -13,14 +13,14 @@
       </div>
     </nav>
 
-    <div class="container py-3">
-      <template v-if="!showContent">
+    <template v-if="!showContent">
+      <div class="container py-3">
         <template v-if="lastPost">
           <router-link class="text-dark" :to="lastPost.path">
             <div class="card m-2">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img :src="lastPost.frontmatter.cover" class="card-img">
+                  <img :src="lastPost.frontmatter.cover" class="card-img" />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
@@ -47,7 +47,7 @@
           <template v-for="(item, index) in pastPosts">
             <router-link class="text-dark" :to="item.path">
               <div class="card card-width mt-3 m-sm-2">
-                <img :src="item.frontmatter.cover" class="card-img-top">
+                <img :src="item.frontmatter.cover" class="card-img-top" />
                 <div class="card-body">
                   <h5 class="card-title">{{ item.title }}</h5>
                   <p class="card-text">{{ item.frontmatter.subtitle }}</p>
@@ -65,13 +65,16 @@
             </router-link>
           </template>
         </div>
-      </template>
+      </div>
+    </template>
 
-      <template v-else>
-        <Content/>
-        <VueDisqus shortname="henriquecustdia"/>
-      </template>
-    </div>
+    <template v-else>
+      <div class="container d-flex flex-column align-items-center py-3">
+        <img class="my-3" :src="`/blog/${$page.frontmatter.cover}`" alt="cover" />
+        <Content />
+        <VueDisqus shortname="henriquecustdia" />
+      </div>
+    </template>
   </div>
 </template>
 
