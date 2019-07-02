@@ -20,7 +20,7 @@
             <div class="card m-2">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img :src="lastPost.frontmatter.cover" class="card-img" />
+                  <img :src="$withBase(lastPost.frontmatter.cover)" class="card-img" />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
@@ -47,7 +47,7 @@
           <template v-for="(item, index) in pastPosts">
             <router-link class="text-dark" :to="item.path">
               <div class="card card-width mt-3 m-sm-2">
-                <img :src="item.frontmatter.cover" class="card-img-top" />
+                <img :src="$withBase(item.frontmatter.cover)" class="card-img-top" />
                 <div class="card-body">
                   <h5 class="card-title">{{ item.title }}</h5>
                   <p class="card-text">{{ item.frontmatter.subtitle }}</p>
@@ -68,9 +68,15 @@
       </div>
     </template>
 
+    <template v-else-if="isAbout">
+      <div class="container post-container py-3">
+        <Content class="post-content" />
+      </div>
+    </template>
+
     <template v-else>
       <div class="container post-container d-flex flex-column align-items-center py-3">
-        <img class="my-3" :src="$page.frontmatter.cover" alt="cover" />
+        <img class="my-3" :src="$withBase($page.frontmatter.cover)" alt="cover" />
         <Content class="post-content" />
         <VueDisqus shortname="henriquecustdia" />
       </div>
@@ -286,6 +292,11 @@ export default {
 
     pastPosts() {
       return this.posts.slice(1);
+    },
+
+    isAbout() {
+      debugger
+      return this.$page.path.startsWith("/sobre-mim");
     },
 
     posts() {
