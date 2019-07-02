@@ -75,8 +75,8 @@
     </template>
 
     <template v-else>
-      <div class="container post-container d-flex flex-column align-items-center py-3">
-        <img class="my-3" :src="$withBase($page.frontmatter.cover)" alt="cover" />
+      <div class="container post-container py-3">
+        <img class="my-3 w-100" :src="$withBase($page.frontmatter.cover)" alt="cover" />
         <Content class="post-content" />
         <VueDisqus shortname="henriquecustdia" />
       </div>
@@ -295,7 +295,6 @@ export default {
     },
 
     isAbout() {
-      debugger
       return this.$page.path.startsWith("/sobre-mim");
     },
 
