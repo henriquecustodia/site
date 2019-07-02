@@ -1,8 +1,8 @@
 ---
 {
-  "updatedAt": "2018-07-19",
+  "updatedAt": "2018-07-18",
   "subtitle": "Injetando providers opcionais de forma inteligente!",
-  "cover": "deps-opcionais-em-angular-cover.jpeg",
+  "cover": "/deps-opcionais-em-angular-cover.jpeg",
   "tags": [
     "angular"
   ]

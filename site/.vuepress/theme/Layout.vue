@@ -69,9 +69,9 @@
     </template>
 
     <template v-else>
-      <div class="container d-flex flex-column align-items-center py-3">
-        <img class="my-3" :src="`/blog/${$page.frontmatter.cover}`" alt="cover" />
-        <Content />
+      <div class="container post-container d-flex flex-column align-items-center py-3">
+        <img class="my-3" :src="$page.frontmatter.cover" alt="cover" />
+        <Content class="post-content" />
         <VueDisqus shortname="henriquecustdia" />
       </div>
     </template>
@@ -235,6 +235,16 @@ a {
 
 a:hover {
   text-decoration: none;
+}
+
+.post-container {
+  max-width: 740px;
+
+  .post-content {
+    /deep/ p {
+      font-size: 20px;
+    }
+  }
 }
 
 @media screen and (max-width: 1024px) {
