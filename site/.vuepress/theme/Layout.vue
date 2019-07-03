@@ -56,7 +56,7 @@
                   </p>
 
                   <div class="d-flex">
-                    <template v-for="(tag) in lastPost.frontmatter.tags">
+                    <template v-for="(tag) in item.frontmatter.tags">
                       <span class="badge badge-dark">{{ tag }}</span>
                     </template>
                   </div>
@@ -224,6 +224,10 @@ pre[class*="language-"] {
 <style lang="scss" scoped>
 a {
   text-decoration: none;
+}
+
+.badge + .badge {
+  margin-left: 5px;
 }
 
 .header {
