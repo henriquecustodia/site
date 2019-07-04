@@ -16,7 +16,7 @@ Recentemente onde trabalho, foi requisitado o desenvolvimento de uma biblioteca 
 
 Logo pensei em usar [webcomponents](https://www.webcomponents.org/introduction), pois atualmente é a tecnologia mais recomendada para distribuir componentes pela web. 
 
-Mas escrever [webcomponents](https://www.webcomponents.org/introduction) apenas com vanilla é um trabalho bem árduo, especialmente se houver uma lógica complexa o componente.
+Mas escrever [webcomponents](https://www.webcomponents.org/introduction) apenas com vanilla é um trabalho bem árduo, especialmente se houver uma lógica complexa.
 
 Após algumas horas de pesquisa e testes, cheguei a conclusão que o melhor custo benefício seria usar Vue, através do plugin [vue-custom-element](https://github.com/karol-f/vue-custom-element).
 
