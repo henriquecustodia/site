@@ -4,7 +4,10 @@ module.exports = {
     lang: 'pt-BR',
     base: '/blog/',
     plugins: {
-        'seo': {}
+        'seo': {
+            url: (_, $site, path) => ($site.themeConfig.domain || '') + '/blog' + path,
+            image: ($page, $site) => $page.frontmatter.image && (($site.themeConfig.domain || '') + '/blog' + $page.frontmatter.image),
+        }
     },
     themeConfig: {
         author: {
@@ -13,6 +16,7 @@ module.exports = {
         }
     },
     head: [
-        ['meta', { name: 'robots', content: 'index,follow' }]
+        ['meta', { name: 'robots', content: 'index,follow' }],
+        ['link', { rel: 'stylesheet', href: '@fortawesome/fontawesome-free/css/all.min.css' }]
     ]
 }

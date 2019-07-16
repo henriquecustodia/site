@@ -1,8 +1,8 @@
 ---
 {
-  "updatedAt": "2019-07-03",
-  "subtitle": "Criando Webcomponents utilizando Vue!",
-  "cover": "/vue+webcomponents.jpg",
+  "date": "2019-07-03",
+  "description": "Criando Webcomponents utilizando Vue!",
+  "image": "/vue+webcomponents.jpg",
   "tags": [
     "vue",
     "webcomponents"

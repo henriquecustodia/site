@@ -65,12 +65,15 @@
             </router-link>
           </template>
         </div>
+
+        <Social />
       </div>
     </template>
 
     <template v-else-if="isAbout">
       <div class="container post-container py-3">
         <Content class="post-content" />
+        <Social />
       </div>
     </template>
 
@@ -78,7 +81,7 @@
       <div class="container post-container py-3">
         <img class="my-3 w-100" :src="$withBase($page.frontmatter.image)" alt="cover" />
         <Content class="post-content" />
-        <VueDisqus shortname="henriquecustdia" />
+        <Social />
       </div>
     </template>
   </div>
@@ -87,27 +90,18 @@
 <style lang="scss">
 @import "bootstrap/scss/bootstrap.scss";
 
-html,
+#app,
 body,
-#app {
+html {
   margin: 0;
   height: 100%;
   width: 100%;
   overflow-x: hidden;
 }
-
-/* PrismJS 1.16.0
-https://prismjs.com/download.html#themes=prism-tomorrow&languages=css+clike+javascript+scss */
-/**
- * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
- * Based on https://github.com/chriskempson/tomorrow-theme
- * @author Rose Pritchard
- */
-
 code[class*="language-"],
 pre[class*="language-"] {
   color: #ccc;
-  background: none;
+  background: 0 0;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   font-size: 1em;
   text-align: left;
@@ -116,106 +110,87 @@ pre[class*="language-"] {
   word-break: normal;
   word-wrap: normal;
   line-height: 1.5;
-
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
-
   -webkit-hyphens: none;
   -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
 }
-
-/* Code blocks */
 pre[class*="language-"] {
   padding: 1em;
   margin: 0.5em 0;
   overflow: auto;
 }
-
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
   background: #2d2d2d;
 }
-
-/* Inline code */
 :not(pre) > code[class*="language-"] {
   padding: 0.1em;
   border-radius: 0.3em;
   white-space: normal;
 }
-
-.token.comment,
 .token.block-comment,
-.token.prolog,
+.token.cdata,
+.token.comment,
 .token.doctype,
-.token.cdata {
+.token.prolog {
   color: #999;
 }
-
 .token.punctuation {
   color: #ccc;
 }
-
-.token.tag,
 .token.attr-name,
+.token.deleted,
 .token.namespace,
-.token.deleted {
+.token.tag {
   color: #e2777a;
 }
-
 .token.function-name {
   color: #6196cc;
 }
-
 .token.boolean,
-.token.number,
-.token.function {
+.token.function,
+.token.number {
   color: #f08d49;
 }
-
-.token.property,
 .token.class-name,
 .token.constant,
+.token.property,
 .token.symbol {
   color: #f8c555;
 }
-
-.token.selector,
-.token.important,
 .token.atrule,
+.token.builtin,
+.token.important,
 .token.keyword,
-.token.builtin {
+.token.selector {
   color: #cc99cd;
 }
-
-.token.string,
-.token.char,
 .token.attr-value,
+.token.char,
 .token.regex,
+.token.string,
 .token.variable {
   color: #7ec699;
 }
-
-.token.operator,
 .token.entity,
+.token.operator,
 .token.url {
   color: #67cdcc;
 }
-
-.token.important,
-.token.bold {
-  font-weight: bold;
+.token.bold,
+.token.important {
+  font-weight: 700;
 }
 .token.italic {
   font-style: italic;
 }
-
 .token.entity {
   cursor: help;
 }
-
 .token.inserted {
   color: green;
 }
@@ -273,14 +248,27 @@ a:hover {
 <script>
 import format from "date-fns/format";
 import pt from "date-fns/locale/pt";
-import VueDisqus from "vue-disqus/dist/vue-disqus.vue";
 
 function formatDate(value) {
   return format(new Date(value), "DD [de] MMMM [de] YYYY", { locale: pt });
 }
 
+const Social = {
+  render(h) {
+    return h("div", { class: "d-flex mt-4 justify-content-center" }, [
+      h(
+        "a",
+        {
+          attrs: { href: "https://twitter.com/henricustodia", target: "_blank" }
+        },
+        [h("i", { class: "fab fa-2x fa-twitter" })]
+      )
+    ]);
+  }
+};
+
 export default {
-  components: { VueDisqus },
+  components: { Social },
   filters: {
     formatDate
   },
