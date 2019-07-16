@@ -20,15 +20,15 @@
             <div class="card m-2">
               <div class="row no-gutters">
                 <div class="col-md-4">
-                  <img :src="$withBase(lastPost.frontmatter.cover)" class="card-img" />
+                  <img :src="$withBase(lastPost.frontmatter.image)" class="card-img" />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
                     <h5 class="card-title">{{ lastPost.title }}</h5>
-                    <p class="card-text">{{ lastPost.frontmatter.subtitle }}</p>
+                    <p class="card-text">{{ lastPost.frontmatter.description }}</p>
 
                     <p class="card-text">
-                      <small class="text-muted">{{ lastPost.frontmatter.updatedAt | formatDate }}</small>
+                      <small class="text-muted">{{ lastPost.frontmatter.date | formatDate }}</small>
                     </p>
 
                     <div class="d-flex">
@@ -47,12 +47,12 @@
           <template v-for="(item, index) in pastPosts">
             <router-link class="text-dark" :to="item.path">
               <div class="card card-width mt-3 m-sm-2">
-                <img :src="$withBase(item.frontmatter.cover)" class="card-img-top" />
+                <img :src="$withBase(item.frontmatter.image)" class="card-img-top" />
                 <div class="card-body">
                   <h5 class="card-title">{{ item.title }}</h5>
-                  <p class="card-text">{{ item.frontmatter.subtitle }}</p>
+                  <p class="card-text">{{ item.frontmatter.description }}</p>
                   <p class="card-text">
-                    <small class="text-muted">{{ item.frontmatter.updatedAt | formatDate }}</small>
+                    <small class="text-muted">{{ item.frontmatter.date | formatDate }}</small>
                   </p>
 
                   <div class="d-flex">
@@ -76,7 +76,7 @@
 
     <template v-else>
       <div class="container post-container py-3">
-        <img class="my-3 w-100" :src="$withBase($page.frontmatter.cover)" alt="cover" />
+        <img class="my-3 w-100" :src="$withBase($page.frontmatter.image)" alt="cover" />
         <Content class="post-content" />
         <VueDisqus shortname="henriquecustdia" />
       </div>
@@ -302,8 +302,8 @@ export default {
       return this.$site.pages
         .filter(item => item.path.startsWith("/posts"))
         .sort((a, b) => {
-          const da = new Date(a.frontmatter.updatedAt);
-          const db = new Date(b.frontmatter.updatedAt);
+          const da = new Date(a.frontmatter.date);
+          const db = new Date(b.frontmatter.date);
 
           return da > db ? -1 : 1;
         });

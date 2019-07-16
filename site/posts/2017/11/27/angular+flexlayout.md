@@ -1,8 +1,8 @@
 ---
 {
-  "updatedAt": "2017-11-27",
-  "subtitle": "Utilizando o módulo Angular baseado em flexbox",
-  "cover": "/angular+flexlayout.png",
+  "date": "2017-11-27",
+  "description": "Utilizando o módulo Angular baseado em flexbox",
+  "image": "/angular+flexlayout.png",
   "tags": [
     "angular"
   ]
