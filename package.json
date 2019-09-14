@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "npx vuepress dev site",
     "build": "npx vuepress build site --dest docs",
-    "deploy": "npm run build && git push"
+    "deploy": "npm run build && git add . && git commit -m \"deploy\" && git push"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "5.9.0",
