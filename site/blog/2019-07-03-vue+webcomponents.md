@@ -10,6 +10,8 @@
 }
 ---
 
+<Post>
+
 # Vue + Webcomponents
 
 Recentemente onde trabalho, foi requisitado o desenvolvimento de uma biblioteca para fornecer componentes que deveriam funcionar em qualquer página web. 
@@ -98,3 +100,5 @@ Simples, não?!
 Se esse artigo ajudou você de alguma forma não deixe de compartilhar e recomendar, garanto que existem muitas pessoas com as mesmas necessidades!
 
 Obrigado por ler e até a próxima! :) 
+
+</Post>

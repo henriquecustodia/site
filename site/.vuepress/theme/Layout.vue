@@ -1,89 +1,32 @@
 <template>
-  <div>
-    <nav class="header navbar navbar-dark bg-dark">
+  <div class="layout d-flex flex-column">
+    <header class="header">
       <div class="d-flex flex-column flex-sm-row align-items-center container">
         <router-link class="text-white" to="/">
-          <h3>Henrique Custódia</h3>
+          <span>/</span>
         </router-link>
 
+        <router-link class="text-white ml-sm-auto" to="/blog">Blog</router-link>
+      </div>
+    </header>
+
+    <Content />
+
+    <footer class="footer mt-auto d-flex align-items-center justify-content-center">
+      <div class="container d-flex flex-column flex-sm-row align-items-center align-items-sm-start">
+        <span class="text-white">Henrique Custódia © {{ new Date().getFullYear() }}</span>
+
         <div class="ml-sm-auto">
-          <router-link class="text-white btn btn-outline-secondary" to="/">Blog</router-link>
-          <router-link class="text-white btn btn-outline-secondary" to="/sobre-mim">Sobre mim</router-link>
+          <a class="mx-1 text-white" href="https://twitter.com/henricustodia" target="_blank">
+            <i class="fab fa-lg fa-twitter"></i>
+          </a>
+
+          <a class="mx-1 text-white" href="https://github.com/henriquecustodia" target="_blank">
+            <i class="fab fa-lg fa-github"></i>
+          </a>
         </div>
       </div>
-    </nav>
-
-    <template v-if="!showContent">
-      <div class="container py-3">
-        <template v-if="lastPost">
-          <router-link class="text-dark" :to="lastPost.path">
-            <div class="card m-2">
-              <div class="row no-gutters">
-                <div class="col-md-4">
-                  <img :src="$withBase(lastPost.frontmatter.image)" class="card-img" />
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">{{ lastPost.title }}</h5>
-                    <p class="card-text">{{ lastPost.frontmatter.description }}</p>
-
-                    <p class="card-text">
-                      <small class="text-muted">{{ lastPost.frontmatter.date | formatDate }}</small>
-                    </p>
-
-                    <div class="d-flex">
-                      <template v-for="(tag) in lastPost.frontmatter.tags">
-                        <span class="badge badge-dark">{{ tag }}</span>
-                      </template>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </router-link>
-        </template>
-
-        <div class="d-flex flex-wrap mt-3">
-          <template v-for="(item, index) in pastPosts">
-            <router-link class="text-dark" :to="item.path">
-              <div class="card card-width mt-3 m-sm-2">
-                <img :src="$withBase(item.frontmatter.image)" class="card-img-top" />
-                <div class="card-body">
-                  <h5 class="card-title">{{ item.title }}</h5>
-                  <p class="card-text">{{ item.frontmatter.description }}</p>
-                  <p class="card-text">
-                    <small class="text-muted">{{ item.frontmatter.date | formatDate }}</small>
-                  </p>
-
-                  <div class="d-flex">
-                    <template v-for="(tag) in item.frontmatter.tags">
-                      <span class="badge badge-dark">{{ tag }}</span>
-                    </template>
-                  </div>
-                </div>
-              </div>
-            </router-link>
-          </template>
-        </div>
-
-        <Social />
-      </div>
-    </template>
-
-    <template v-else-if="isAbout">
-      <div class="container post-container py-3">
-        <Content class="post-content" />
-        <Social />
-      </div>
-    </template>
-
-    <template v-else>
-      <div class="container post-container py-3">
-        <img class="my-3 w-100" :src="$withBase($page.frontmatter.image)" alt="cover" />
-        <Content class="post-content" />
-        <Social />
-      </div>
-    </template>
+    </footer>
   </div>
 </template>
 
@@ -197,110 +140,27 @@ pre[class*="language-"] {
 </style>
 
 <style lang="scss" scoped>
-a {
-  text-decoration: none;
-}
-
-.badge + .badge {
-  margin-left: 5px;
+.layout {
+  height: 100%;
+  width: 100%;
+  padding-top: 70px;
 }
 
 .header {
-  height: 100px;
-  background: rgba(0, 0, 0, 0.9);
+  height: 70px;
+  background: #000;
   display: flex;
   justify-content: center;
   padding: 0 25px;
-}
-
-.card-width {
-  max-width: 350px;
+  top: 0;
+  position: fixed;
+  z-index: 1000;
   width: 100%;
 }
 
-a:hover {
-  text-decoration: none;
-}
-
-.post-container {
-  max-width: 740px;
-
-  .post-content {
-    /deep/ p {
-      font-size: 20px;
-    }
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .card-width {
-    max-width: 300px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .card-width {
-    max-width: none;
-  }
+.footer {
+  height: 50px;
+  background: #000;
+  padding: 25px;
 }
 </style>
-
-<script>
-import format from "date-fns/format";
-import pt from "date-fns/locale/pt";
-
-function formatDate(value) {
-  return format(new Date(value), "DD [de] MMMM [de] YYYY", { locale: pt });
-}
-
-const Social = {
-  render(h) {
-    return h("div", { class: "d-flex mt-4 justify-content-center" }, [
-      h(
-        "a",
-        {
-          attrs: { href: "https://twitter.com/henricustodia", target: "_blank" }
-        },
-        [h("i", { class: "fab fa-2x fa-twitter" })]
-      )
-    ]);
-  }
-};
-
-export default {
-  components: { Social },
-  filters: {
-    formatDate
-  },
-
-  computed: {
-    showContent() {
-      return this.$page.path !== "/";
-    },
-
-    lastPost() {
-      return this.posts[0];
-    },
-
-    pastPosts() {
-      return this.posts.slice(1);
-    },
-
-    isAbout() {
-      return this.$page.path.startsWith("/sobre-mim");
-    },
-
-    posts() {
-      return this.$site.pages
-        .filter(item => item.path.startsWith("/posts"))
-        .sort((a, b) => {
-          const da = new Date(a.frontmatter.date);
-          const db = new Date(b.frontmatter.date);
-
-          return da > db ? -1 : 1;
-        });
-    }
-  },
-  methods: {}
-};
-</script>

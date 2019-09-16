@@ -9,6 +9,8 @@
 }
 ---
 
+<Post>
+
 # Deps opcionais em Angular
 
 Geralmente quando crio componentes em Angular, é preciso fornecer uma maneira de customizar como a lógica do mesmo vai funcionar. Uma boa maneira para fazer isso, é criar uma classe de configuração com algumas propriedades que vão ditar como a lógica funcionará. Assim, poderíamos usar essa classe de configuração da seguinte forma em um componente:
@@ -145,3 +147,4 @@ Se esse artigo ajudou você de alguma forma não deixe de compartilhar e recomen
 
 Obrigado por ler e até a próxima! :)
 
+</Post>

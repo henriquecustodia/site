@@ -9,6 +9,8 @@
 }
 ---
 
+<Post>
+
 # Angular + FlexLayout
 
 Atualmente nos projetos em que estou trabalhando, utilizamos como tecnologia base para o Frontend o framework Angular2+, sendo assim poupamos muito tempo que poderia ser gasto construindo toda um setup para os projetos.
@@ -118,3 +120,5 @@ Para necessidades que vão além do css (como essa que apresentei no artigo) Fle
 Se esse artigo ajudou você de alguma forma não deixe de compartilhar e recomendar, garanto que existem muitas pessoas com as mesmas necessidades!
 
 Obrigado por ler e até a próxima! :)
+
+</Post>
