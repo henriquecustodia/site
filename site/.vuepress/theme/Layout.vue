@@ -1,12 +1,12 @@
 <template>
   <div class="layout d-flex flex-column">
     <header class="header">
-      <div class="d-flex flex-column flex-sm-row align-items-center container">
+      <div class="d-flex flex-row align-items-center container">
         <router-link class="text-white" to="/">
-          <span>/</span>
+          <span>Home</span>
         </router-link>
 
-        <router-link class="text-white ml-sm-auto" to="/blog">Blog</router-link>
+        <router-link class="text-white ml-auto" to="/blog">Blog</router-link>
       </div>
     </header>
 
