@@ -8,7 +8,7 @@
     <div class="content container py-3">
       <div class="d-flex justify-content-center mb-5">
         <picture class="perfil-image">
-          <img class="img-fluid" src="/me.jpg" alt />
+          <img class="img-fluid" :src="$withBase('/me.jpg')" alt="Me" />
         </picture>
       </div>
 
