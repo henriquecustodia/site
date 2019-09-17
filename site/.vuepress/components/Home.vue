@@ -27,6 +27,7 @@
 
 <style lang="scss" scoped>
 .banner {
+  text-align: center;
   min-height: 400px;
   background: #000;
 }

@@ -151,6 +151,7 @@ pre[class*="language-"] {
   background: #000;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 0 25px;
   top: 0;
   position: fixed;
@@ -159,7 +160,7 @@ pre[class*="language-"] {
 }
 
 .footer {
-  height: 50px;
+  min-height: 50px;
   background: #000;
   padding: 25px;
 }

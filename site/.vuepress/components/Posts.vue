@@ -49,7 +49,7 @@ export default {
   computed: {
     posts() {
       return this.$site.pages
-        .filter(item => item.path.startsWith("/blog/2"))
+        .filter(item => Boolean(item.frontmatter.tags))
         .sort((a, b) => {
           const da = new Date(a.frontmatter.date);
           const db = new Date(b.frontmatter.date);
