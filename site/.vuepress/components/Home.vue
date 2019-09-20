@@ -33,7 +33,7 @@
           <Skill class="my-1" name="Vue" skill="8" />
           <Skill class="my-1" name="React" skill="4" />
           <Skill class="my-1" name="Nuxt.js" skill="7" />
-          <Skill class="my-1" name="Node.js" skill="7" />
+          <Skill class="my-1" name="Node.js" skill="6" />
           <Skill class="my-1" name="Koa" skill="6" />
           <Skill class="my-1" name="Sequelize" skill="5" />
           <Skill class="my-1" name="CSS" skill="7" />
