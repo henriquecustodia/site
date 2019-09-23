@@ -26,6 +26,6 @@ module.exports = {
     },
     head: [
         ['meta', { name: 'robots', content: 'index,follow' }],
-        ['link', { rel: 'stylesheet', href: 'https://unpkg.com/browse/@fortawesome/fontawesome-free@5.11.2/css/all.min.css' }]
+        ['link', { rel: 'stylesheet', href: '/fontawesome-free-5.11.2-web/css/all.min.css' }]
     ]
 }
