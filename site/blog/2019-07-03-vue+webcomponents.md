@@ -1,6 +1,7 @@
 ---
 {
   "date": "2019-07-03",
+  "title": "Vue + Webcomponents",
   "description": "Criando Webcomponents utilizando Vue!",
   "image": "/media/vue+webcomponents.jpg",
   "tags": [

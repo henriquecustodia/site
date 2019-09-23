@@ -13,10 +13,10 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">{{ item.title }}</h5>
+                <h3 class="card-title">{{ item.title }}</h3>
                 <p class="card-text">{{ item.frontmatter.description }}</p>
                 <p class="card-text">
-                  <small class="text-muted">{{ item.frontmatter.date | formatDate }}</small>
+                  <small class="text-muted">{{ item.frontmatter.date | $formatDate }}</small>
                 </p>
 
                 <div class="d-flex">
@@ -34,18 +34,7 @@
 </template>
 
 <script>
-import format from "date-fns/format";
-import pt from "date-fns/locale/pt";
-
-function formatDate(value) {
-  return format(new Date(value), "DD [de] MMMM [de] YYYY", { locale: pt });
-}
-
 export default {
-  filters: {
-    formatDate
-  },
-
   computed: {
     posts() {
       return this.$site.pages
