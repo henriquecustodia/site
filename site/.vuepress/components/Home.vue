@@ -6,13 +6,13 @@
     </div>
 
     <div class="content pt-3">
-      <div class="d-flex justify-content-center mb-5 container">
+      <div class="d-flex justify-content-center mb-3 container">
         <picture class="perfil-image">
-          <img class="img-fluid" :src="$withBase('/me.jpg')" alt="Me" />
+          <img class="img-fluid" :src="$withBase('/media/me.jpg')" alt="Me" />
         </picture>
       </div>
 
-      <section class="d-flex justify-content-center container">
+      <section class="d-flex justify-content-center container py-5">
         <div class="about-me">
           <p>Oi! Seja bem vindo(a) ao meu website :)</p>
 
@@ -24,7 +24,7 @@
         </div>
       </section>
 
-      <section class="skills d-flex justify-content-center py-3">
+      <section class="skills d-flex justify-content-center py-5">
         <div class="skills-content d-flex flex-column align-items-center">
           <h1>Habilidades</h1>
 
