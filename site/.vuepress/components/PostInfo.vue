@@ -1,22 +1,26 @@
 <template>
-  <div class="d-flex">
+  <div class="d-flex align-items-center">
     <span class="text-muted">{{ $page.frontmatter.date | $formatDate }}</span>
 
     <div class="ml-auto">
-      <a
-        class="twitter-share-button"
-        :href="`https://twitter.com/intent/tweet?text=${tweetContent}`"
-      >Tweet</a>
+      <div ref="goodshare"></div>
     </div>
   </div>
 </template>
 
 <script>
+import VueGoodshareTwitter from "vue-goodshare/src/providers/Twitter.vue";
+import Vue from "vue";
+
 export default {
-    computed: {
-        tweetContent() {
-            return `"${this.$page.title}" escrito por @henricustodia`;
-        }
-    }
-}
+  mounted() {
+    const Component = Vue.extend(VueGoodshareTwitter);
+    new Component({
+      propsData: {
+        page_title: `"${this.$page.title}" escrito por @henricustodia`,
+        has_icon: true
+      }
+    }).$mount(this.$refs.goodshare);
+  }
+};
 </script>
