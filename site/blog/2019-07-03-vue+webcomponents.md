@@ -1,5 +1,6 @@
 ---
 {
+  "lang": "pt-BR",
   "date": "2019-07-03",
   "title": "Vue + Webcomponents",
   "description": "Criando Webcomponents utilizando Vue!",

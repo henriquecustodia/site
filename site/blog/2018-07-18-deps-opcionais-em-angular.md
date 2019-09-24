@@ -1,5 +1,6 @@
 ---
 {
+  "lang": "pt-BR",
   "date": "2018-07-18",
   "title": "Deps opcionais em Angular",
   "description": "Injetando providers opcionais de forma inteligente!",

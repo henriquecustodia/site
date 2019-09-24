@@ -1,5 +1,6 @@
 ---
 {
+  "lang": "pt-BR",
   "date": "2017-11-27",
   "title": "Angular + FlexLayout",
   "description": "Utilizando o módulo Angular baseado em flexbox",

@@ -1,7 +1,6 @@
 module.exports = {
     title: 'Henrique Custódia',
     description: 'Um pouco sobre mim, habilidades e muitos posts',
-    lang: 'pt-BR',
     base: '/site/',
     plugins: [
         [
