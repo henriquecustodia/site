@@ -20,7 +20,7 @@ module.exports = {
     themeConfig: {
         author: {
             name: 'Henrique Custódia',
-            twitter: '@henricustodia'
+            twitter: '@custodiadev'
         }
     },
     head: [

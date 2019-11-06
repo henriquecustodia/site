@@ -17,7 +17,7 @@ export default {
     const Component = Vue.extend(VueGoodshareTwitter);
     new Component({
       propsData: {
-        page_title: `"${this.$page.title}" escrito por @henricustodia`,
+        page_title: `"${this.$page.title}" escrito por @custodiadev`,
         has_icon: true
       }
     }).$mount(this.$refs.goodshare);

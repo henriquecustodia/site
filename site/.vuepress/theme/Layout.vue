@@ -17,7 +17,7 @@
         <span class="text-white">Henrique Custódia © {{ new Date().getFullYear() }}</span>
 
         <div class="ml-sm-auto">
-          <a class="mx-1 text-white" href="https://twitter.com/henricustodia" target="_blank">
+          <a class="mx-1 text-white" href="https://twitter.com/custodiadev" target="_blank">
             <i class="fab fa-lg fa-twitter"></i>
           </a>
 
